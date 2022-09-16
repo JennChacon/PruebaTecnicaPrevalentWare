@@ -9,7 +9,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>766,621</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>766,798</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>InsertDataNotFoundInMaestra_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -76,49 +76,41 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="InsertDataNotFoundInMaestra" sap:VirtualizedContainerService.HintSize="452,416" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="InsertDataNotFoundInMaestra" sap:VirtualizedContainerService.HintSize="526,593" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_DataNotExistPerson]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="410,324" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
-      <ui:ForEachRow.Body>
-        <ActivityAction x:TypeArguments="sd:DataRow">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,204" sap2010:WorkflowViewState.IdRef="Sequence_2">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke InsertQuery workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="InsertQuery.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="x:String" x:Key="str_IdPersona">
-                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="row(&quot;idPersona&quot;).ToString" />
-                </InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="str_NombrePersona">
-                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="row(&quot;nombrePersona&quot;).ToString" />
-                </InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="str_Pais">
-                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="row(&quot;pais&quot;).ToString" />
-                </InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="str_CantidadResultado">
-                  <Literal x:TypeArguments="x:String">0</Literal>
-                </InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="str_EstadoTransaccion">
-                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;NOK”" />
-                </InArgument>
-                <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="in_Connection">
-                  <mva:VisualBasicValue x:TypeArguments="ui:DatabaseConnection" ExpressionText="in_Connection" />
-                </InArgument>
-              </ui:InvokeWorkflowFile.Arguments>
-            </ui:InvokeWorkflowFile>
-          </Sequence>
-        </ActivityAction>
-      </ui:ForEachRow.Body>
-    </ui:ForEachRow>
+    <If Condition="[not dt_DataNotExistPerson is Nothing]" sap:VirtualizedContainerService.HintSize="484,501" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_DataNotExistPerson]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="410,324" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+          <ui:ForEachRow.Body>
+            <ActivityAction x:TypeArguments="sd:DataRow">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,204" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke InsertQuery workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="InsertQuery.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="str_IdPersona">[row("idPersona").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="str_NombrePersona">[row("nombrePersona").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="str_Pais">[row("pais").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="str_CantidadResultado">0</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="str_EstadoTransaccion">["NOK”]</InArgument>
+                    <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="in_Connection">[in_Connection]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+            </ActivityAction>
+          </ui:ForEachRow.Body>
+        </ui:ForEachRow>
+      </If.Then>
+    </If>
   </Sequence>
 </Activity>
