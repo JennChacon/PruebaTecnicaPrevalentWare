@@ -1,17 +1,16 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="DatabaseQueries" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="DatabaseQueries" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="str_QueryType" Type="InArgument(x:String)" />
-    <x:Property Name="str_TableName" Type="InArgument(x:String)" />
     <x:Property Name="dt_DataResponse" Type="OutArgument(sd:DataTable)" />
     <x:Property Name="in_Connection" Type="InArgument(ui:DatabaseConnection)" />
+    <x:Property Name="dt_DataNotExistPerson" Type="OutArgument(sd:DataTable)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>599,663</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>766,515</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>DatabaseQueries_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <sco:Collection x:TypeArguments="x:String">
+    <scg:List x:TypeArguments="x:String" Capacity="35">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -40,10 +39,17 @@
       <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Database.Activities</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
-    </sco:Collection>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+    </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <sco:Collection x:TypeArguments="AssemblyReference">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="31">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -72,26 +78,26 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
-    </sco:Collection>
+    </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="DatabaseQueries" sap:VirtualizedContainerService.HintSize="526,458" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="DatabaseQueries" sap:VirtualizedContainerService.HintSize="376,308" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[str_QueryType.Equals(&quot;SELECT&quot;)]" sap:VirtualizedContainerService.HintSize="484,265" sap2010:WorkflowViewState.IdRef="If_1">
-      <If.Then>
-        <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_DataResponse]" DisplayName="Execute Query" ExistingDbConnection="[in_connection]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="[&quot;SELECT * FROM public.&quot;&quot;&quot;+str_TableName+&quot;&quot;&quot;&quot;]">
-          <ui:ExecuteQuery.Parameters>
-            <InArgument x:TypeArguments="x:String" x:Key="str_TableName">
-              <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_TableName" />
-            </InArgument>
-          </ui:ExecuteQuery.Parameters>
-        </ui:ExecuteQuery>
-      </If.Then>
-    </If>
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="aqui" />
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_DataResponse]" DisplayName="Execute Query" ExistingDbConnection="[in_connection]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_3" Sql="[&quot;SELECT * FROM public.&quot;&quot;Personas&quot;&quot; P LEFT JOIN public.&quot;&quot;MaestraDetallePersonas&quot;&quot; M On P.&quot;&quot;idPersona&quot;&quot; = M.&quot;&quot;idPersona&quot;&quot; WHERE M.&quot;&quot;idPersona&quot;&quot; IS NULL&quot;]">
+      <ui:ExecuteQuery.Parameters>
+        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+      </ui:ExecuteQuery.Parameters>
+    </ui:ExecuteQuery>
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_DataResponse]" DisplayName="Execute Query" ExistingDbConnection="[in_connection]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="[&quot;SELECT P.&quot;&quot;idPersona&quot;&quot;, P.&quot;&quot;nombrePersona&quot;&quot;, M.&quot;&quot;direccion&quot;&quot;,M.&quot;&quot;pais&quot;&quot; FROM public.&quot;&quot;Personas&quot;&quot; P JOIN public.&quot;&quot;MaestraDetallePersonas&quot;&quot; M On P.&quot;&quot;idPersona&quot;&quot; = M.&quot;&quot;idPersona&quot;&quot; WHERE P.&quot;&quot;aConsultar&quot;&quot;='Si'&quot;]">
+      <ui:ExecuteQuery.Parameters>
+        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+      </ui:ExecuteQuery.Parameters>
+    </ui:ExecuteQuery>
   </Sequence>
 </Activity>

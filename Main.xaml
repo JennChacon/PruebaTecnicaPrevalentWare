@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="719,865" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="766,1017" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="37">
       <x:String>System.Activities</x:String>
@@ -74,17 +74,15 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="376,660" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap:VirtualizedContainerService.HintSize="376,812" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ui:DatabaseConnection" Name="in_Connection" />
-      <Variable x:TypeArguments="x:String" Name="str_QueryType" />
-      <Variable x:TypeArguments="x:String" Name="str_TableName" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_DataResponse" />
       <Variable x:TypeArguments="njl:JObject" Name="jo_ConnectionData" />
       <Variable x:TypeArguments="x:String" Name="str_UrlOFAC" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_DataNotExistPerson" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -93,35 +91,34 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ConfigurationFile workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="ConfigurationFile.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <OutArgument x:TypeArguments="njl:JObject" x:Key="jo_ConnectionData">
-          <mva:VisualBasicReference x:TypeArguments="njl:JObject" ExpressionText="jo_ConnectionData" />
-        </OutArgument>
-        <OutArgument x:TypeArguments="x:String" x:Key="str_UrlOFAC">
-          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="str_UrlOFAC" />
-        </OutArgument>
+        <OutArgument x:TypeArguments="njl:JObject" x:Key="jo_ConnectionData">[jo_ConnectionData]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="str_UrlOFAC">[str_UrlOFAC]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ConnectionDatabase workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="ConnectionDatabase.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InOutArgument x:TypeArguments="ui:DatabaseConnection" x:Key="in_Connection">
-          <mva:VisualBasicReference x:TypeArguments="ui:DatabaseConnection" ExpressionText="in_Connection" />
-        </InOutArgument>
-        <InArgument x:TypeArguments="njl:JObject" x:Key="jo_ConnectionData">
-          <mva:VisualBasicValue x:TypeArguments="njl:JObject" ExpressionText="jo_ConnectionData" />
-        </InArgument>
+        <InOutArgument x:TypeArguments="ui:DatabaseConnection" x:Key="in_Connection">[in_Connection]</InOutArgument>
+        <InArgument x:TypeArguments="njl:JObject" x:Key="jo_ConnectionData">[jo_ConnectionData]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke DatabaseQueries workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="DatabaseQueries.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke SelectQuery workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="SelectQuery.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="str_QueryType">
-          <Literal x:TypeArguments="x:String">SELECT</Literal>
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="str_TableName">
-          <Literal x:TypeArguments="x:String">Personas</Literal>
-        </InArgument>
         <OutArgument x:TypeArguments="sd:DataTable" x:Key="dt_DataResponse">
           <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_DataResponse" />
         </OutArgument>
+        <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="in_Connection">
+          <mva:VisualBasicValue x:TypeArguments="ui:DatabaseConnection" ExpressionText="in_Connection" />
+        </InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="dt_DataNotExistPerson">
+          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_DataNotExistPerson" />
+        </OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke InsertDataNotFoundInMaestra workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="InsertDataNotFoundInMaestra.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_DataNotExistPerson">
+          <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_DataNotExistPerson" />
+        </InArgument>
         <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="in_Connection">
           <mva:VisualBasicValue x:TypeArguments="ui:DatabaseConnection" ExpressionText="in_Connection" />
         </InArgument>
@@ -129,9 +126,9 @@
     </ui:InvokeWorkflowFile>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke OFAC_Platform workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="OFAC_Platform.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="str_UrlOFAC">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_UrlOFAC" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="str_UrlOFAC">[str_UrlOFAC]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_DataResponse">[dt_DataResponse]</InArgument>
+        <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="in_Connection">[in_Connection]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>
