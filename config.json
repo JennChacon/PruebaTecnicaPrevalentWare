@@ -1,0 +1,9 @@
+{
+	"ConnectionData":{
+		"DNS":"PRUEBA_PREVALENT",
+		"UserID":"jachacona",
+		"Password":"pruebajachacona2022",
+		"ProviderName":"System.Data.Odbc"
+	},
+	"UrlOFAC":"https://sanctionssearch.ofac.treas.gov/"
+}
