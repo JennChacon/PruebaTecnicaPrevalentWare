@@ -7,8 +7,7 @@ Se creó un DNS de sistema para hacer la conexion a la base de datos desde UIPAT
 
 Se creó una carpeta en el proyecto con el nombre ImgScreenshots donde se almacenan todos los pantallazos tomados por el robot
 
-![image](https://user-images.githubusercontent.com/66443444/190829056-4a3a2eda-5c21-483b-b9a6-a14252ff1f06.png)
-
+![image](https://user-images.githubusercontent.com/66443444/190829330-fc559f13-f249-47a4-b973-d2ea0bc01b08.png)
 
 Además de un archivo de configuraciones donde se tienen los parametros para la conexion y una variable para la url de la plataforma OFAC
 
